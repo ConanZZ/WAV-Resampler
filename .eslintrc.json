@@ -1,0 +1,27 @@
+{
+    "parser": "@typescript-eslint/parser",
+    "plugins": ["@typescript-eslint/eslint-plugin"],
+    "overrides": [
+        {
+          "files": [ "src/**/*.{js,jsx,ts,tsx}" ],
+          "rules": {
+            // 单文件最大行数，不包含空白行及纯注释行
+            "max-lines": ["error", 400],
+            // function内最大缩进数
+            "max-depth": ["error", 2],
+            // 最大条件组合数
+            "react-func/max-combined-conditions": ["warn", 3],
+            // function最大行数，不包括空白行及注释行
+            "react-func/max-lines-per-function": [
+              "warn",
+              {
+                "max": 30,
+                "skipBlankLines": true,
+                "skipComments": true,
+                "IIFEs": true
+              }
+            ]
+          }
+        }
+      ]
+}
