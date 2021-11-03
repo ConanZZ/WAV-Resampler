@@ -1,20 +1,50 @@
 const path = require('path');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+
+const htmlWebpackPlugin = new HtmlWebpackPlugin({
+  template: path.join(__dirname, './example/src/index.html'),
+  filename: './index.html',
+});
 
 module.exports = function (env, argv) {
   return {
-    entry: path.resolve(__dirname, 'src/index.ts'),
+    entry: path.resolve(__dirname, './example/src/index.tsx'),
     output: {
-      path: path.resolve(__dirname, 'dist/assets'),
+      path: path.resolve(__dirname, '/example/dist'),
+      filename: 'bundle.js',
     },
+    mode: 'development',
     module: {
-      rule: [
+      rules: [
         {
           test: /\.(jsx|js|ts|tsx)$/,
-          include: ['src'],
-          use: ['eslint-loader'],
+          include: [path.resolve(__dirname, '/src/')],
+          use: 'eslint-loader',
           enforce: 'pre',
         },
+        {
+          test: /\.tsx?$/,
+          use: [
+            {
+              loader: 'ts-loader',
+              options: {
+                transpileOnly: true,
+              },
+            },
+          ],
+        },
+        {
+          test: /\.less$/,
+          use: ['style-loader', 'css-loader', 'less-loader'],
+        },
       ],
+    },
+    resolve: {
+      extensions: ['.tsx', '.ts', '.js', '.jsx', '.json'],
+    },
+    plugins: [htmlWebpackPlugin],
+    devServer: {
+      port: 3004,
     },
   };
 };

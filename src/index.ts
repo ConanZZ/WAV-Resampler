@@ -1,32 +1,22 @@
 import { linear, lagrange, sine, ResampleParams } from './resampleMethod';
 
 type Resampler = ResampleParams & {
-  fn: MethodType;
+  fn: MethodParams;
 };
 
-enum MethodType {
-  Linear = 'linear',
-  Lagrange = 'lagrange',
-  Sine = 'sine',
-}
+export type MethodParams = 'linear' | 'lagrange' | 'sine';
 
-// const wavAudioAnalyser = (file: File) => {
-//   const reader = new FileReader();
-//   reader.readAsArrayBuffer(file);
-//   reader.onload = (event: ProgressEvent<FileReader>) => analyseWavAudio(event.target.result as ArrayBuffer);
-// };
-
-const getConvertFn = (fn: MethodType) => {
+const getConvertFn = (fn: MethodParams) => {
   let convertFn;
 
   switch (fn) {
-    case MethodType.Lagrange:
+    case 'lagrange':
       convertFn = lagrange;
       break;
-    case MethodType.Linear:
+    case 'linear':
       convertFn = linear;
       break;
-    case MethodType.Sine:
+    case 'sine':
       convertFn = sine;
       break;
   }
