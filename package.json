@@ -1,6 +1,6 @@
 {
   "name": "wav-audio-resampler",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "1、提供检测指定WAV文件采样率和采样深度的功能，2、提供WAV音频重采样功能，3、提供播放重采样音频的功能",
   "main": "./dist/index.js",
   "scripts": {
@@ -14,7 +14,8 @@
   },
   "keywords": [
     "wav",
-    "resample"
+    "resample",
+    "typescript"
   ],
   "author": "ConanZZ",
   "license": "ISC",
